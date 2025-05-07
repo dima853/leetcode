@@ -1,6 +1,7 @@
-package org.lessons;
+package org.lessons.SlidingWindow;
 
-public class SlidingWindow {
+// 1 MaxSum
+class SlidingWindow {
     public static void main(String[] args) {
         int[] arr = {1, 4, 2, 10, 2, 3, 1, 0, 20};
         int k = 4;

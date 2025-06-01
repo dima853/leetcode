@@ -1,5 +1,7 @@
 package org.lessons.SlidingWindow;
 
+import java.util.HashMap;
+
 // 1 MaxSum
 class SlidingWindow {
     public static void main(String[] args) {
@@ -29,5 +31,41 @@ class SlidingWindow {
         }
 
         return maxSum;
+    }
+}
+
+// 2
+class DynamicWindow {
+    public static int lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty()) {
+            return 0;
+        }
+
+        HashMap<Character, Integer> charIndexMap = new HashMap<>();
+        int maxLength = 0;
+        int left = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char currentChar = s.charAt(right);
+
+            // If the symbol has already been encountered and its index is in the current window
+            if (charIndexMap.containsKey(currentChar) && charIndexMap.get(currentChar) >= left) {
+                // Moving the left border of the window
+                left = charIndexMap.get(currentChar) + 1;
+            }
+
+            // Updating the index of the current character
+            charIndexMap.put(currentChar, right);
+
+            // Updating the maximum length
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+
+    public static void main(String[] args) {
+        String s = "abcabcbb";
+        System.out.println("Length of the longest substring without repetitions: " + lengthOfLongestSubstring(s));
     }
 }
